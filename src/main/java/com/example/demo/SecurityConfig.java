@@ -11,19 +11,15 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-            .csrf(csrf -> csrf.disable())
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/auth/**").permitAll()
-                .requestMatchers("/api/questions/**").permitAll() // Add this line
-                .anyRequest().authenticated()
-            );
-        
-        return http.build();
-    }
+        @Bean
+        public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+            http.csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(auth -> auth
+                    .requestMatchers("/api/auth/**", "/api/questions/**").permitAll()
+                    .anyRequest().authenticated()
+                );
+            return http.build();
+        }
 
     // PasswordEncoder ka Bean, jise AuthService use karega
     @Bean
