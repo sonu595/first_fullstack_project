@@ -20,11 +20,9 @@ public class AuthController {
         boolean isAuthenticated = authService.login(loginRequest.getEmail(), loginRequest.getPassword());
         
         if (isAuthenticated) {
-            // Constructor fix: (message, success)
             AuthResponse response = new AuthResponse("Login successful", true);
             return ResponseEntity.ok(response);
         } else {
-            // Constructor fix: (message, success)
             AuthResponse response = new AuthResponse("Invalid email or password", false);
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
         }
@@ -32,8 +30,7 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<AuthResponse> signup(@Valid @RequestBody SignupRequest signupRequest) {
-        
-        // SignupRequest se User object banaya
+
         User user = new User(
             signupRequest.getName(),
             signupRequest.getAge(),
@@ -44,11 +41,9 @@ public class AuthController {
         boolean isRegistered = authService.register(user);
         
         if (isRegistered) {
-            // Constructor fix: (message, success)
             AuthResponse response = new AuthResponse("User registered successfully", true);
             return ResponseEntity.status(HttpStatus.CREATED).body(response);
         } else {
-            // Constructor fix: (message, success)
             AuthResponse response = new AuthResponse("Email already exists", false);
             return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
         }

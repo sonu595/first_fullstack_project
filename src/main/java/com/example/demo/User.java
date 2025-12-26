@@ -16,14 +16,13 @@ public class User {
     @Column(nullable = false)
     private Integer age;
     
-    // Email ko unique banaya taaki duplicate email na aaye
     @Column(nullable = false, unique = true)
     private String email;
     
     @Column(nullable = false)
     private String password;
 
-    // Constructors
+
     public User() {}
 
     public User(String name, Integer age, String email, String password) {
@@ -33,7 +32,6 @@ public class User {
         this.password = password;
     }
 
-    // Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     
